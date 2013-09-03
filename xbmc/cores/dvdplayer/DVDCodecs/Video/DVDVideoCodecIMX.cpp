@@ -16,7 +16,7 @@
  *  <http://www.gnu.org/licenses/>.
  *
  */
-
+#include <sys/types.h>
 #include <linux/mxcfb.h>
 #include "DVDVideoCodecIMX.h"
 

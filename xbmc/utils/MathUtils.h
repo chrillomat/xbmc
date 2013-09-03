@@ -39,6 +39,8 @@
     defined(TARGET_RASPBERRY_PI)
   #define DISABLE_MATHUTILS_ASM_ROUND_INT
 #endif
+// workaround for build problems
+#define DISABLE_MATHUTILS_ASM_ROUND_INT
 
 #if defined(__ppc__) || \
     defined(__powerpc__) || \
@@ -47,6 +49,8 @@
     defined(TARGET_RASPBERRY_PI)
   #define DISABLE_MATHUTILS_ASM_TRUNCATE_INT
 #endif
+// workaround for build problems
+#define DISABLE_MATHUTILS_ASM_TRUNCATE_INT
 
 /*! \brief Math utility class.
  Note that the test() routine should return true for all implementations
