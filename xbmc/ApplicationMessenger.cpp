@@ -61,6 +61,8 @@
 #include "threads/SingleLock.h"
 
 #include "playlists/PlayList.h"
+#include "playlists/PlayListM3U.h"
+#include "FileItem.h"
 
 #include "pvr/PVRManager.h"
 #include "windows/GUIWindowLoginScreen.h"
@@ -653,6 +655,18 @@ void CApplicationMessenger::ProcessMessage(ThreadMessage *pMsg)
       }
       break;
 
+    case TMSG_PLAYLISTPLAYER_SAVE:
+      {
+        PLAYLIST::CPlayList playlist = g_playlistPlayer.GetPlaylist(pMsg->dwParam1);
+        CStdString fileName = pMsg->strParam;
+        PLAYLIST::CPlayListM3U playlistM3U;
+        playlistM3U.Add(playlist);
+        CStdString strBase = URIUtils::AddFileToFolder(CSettings::Get().GetString("system.playlistspath"), "music");
+        CStdString path = URIUtils::AddFileToFolder(strBase, fileName + ".m3u");
+        playlistM3U.Save(path);
+      }
+      break;
+
     // Window messages below here...
     case TMSG_DIALOG_DOMODAL:  //doModel of window
       {
@@ -1087,6 +1101,15 @@ void CApplicationMessenger::PlayListPlayerSwap(int playlist, int indexItem1, int
   tMsg.lpVoid = (void *)indexes;
   SendMessage(tMsg, true);
 }
+
+void CApplicationMessenger::PlayListPlayerSave(int playlist, const CStdString fileName)
+{
+  ThreadMessage tMsg = {TMSG_PLAYLISTPLAYER_SAVE};
+  tMsg.dwParam1 = playlist;
+  tMsg.strParam = fileName;
+  SendMessage(tMsg, true);
+}
+
 
 void CApplicationMessenger::PlayListPlayerRepeat(int playlist, int repeatState)
 {

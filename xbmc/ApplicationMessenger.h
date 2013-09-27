@@ -70,6 +70,7 @@ namespace MUSIC_INFO
 #define TMSG_PLAYLISTPLAYER_SWAP 223
 #define TMSG_PLAYLISTPLAYER_REPEAT 224
 #define TMSG_UPDATE_CURRENT_ITEM 225
+#define TMSG_PLAYLISTPLAYER_SAVE 226
 
 #define TMSG_PICTURE_SHOW         220
 #define TMSG_PICTURE_SLIDESHOW    221
@@ -191,6 +192,7 @@ public:
   void PlayListPlayerInsert(int playlist, const CFileItemList &list, int position);
   void PlayListPlayerRemove(int playlist, int position);
   void PlayListPlayerSwap(int playlist, int indexItem1, int indexItem2);
+  void PlayListPlayerSave(int playlist, const CStdString fileName);
   void PlayListPlayerRepeat(int playlist, int repeatState);
 
   void PlayFile(const CFileItem &item, bool bRestart = false); // thread safe version of g_application.PlayFile()

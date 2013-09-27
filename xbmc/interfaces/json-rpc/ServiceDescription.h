@@ -2138,6 +2138,17 @@ namespace JSONRPC
       "],"
       "\"returns\": \"string\""
     "}",
+    "\"Playlist.Save\": {"
+      "\"type\": \"method\","
+      "\"description\": \"Save items in the playlist. Only works for audio playlists currently.\","
+      "\"transport\": \"Response\","
+      "\"permission\": \"WriteFile\","
+      "\"params\": ["
+        "{ \"name\": \"playlistid\", \"$ref\": \"Playlist.Id\", \"required\": true },"
+        "{ \"name\": \"filename\", \"type\": \"string\", \"required\": true, \"minLength\": 1, \"description\": \"Filename for playlist (*.m3u) file, excluding extension\"  }"
+      "],"
+      "\"returns\": \"string\""
+    "}",
     "\"Files.GetSources\": {"
       "\"type\": \"method\","
       "\"description\": \"Get the sources of the media windows\","

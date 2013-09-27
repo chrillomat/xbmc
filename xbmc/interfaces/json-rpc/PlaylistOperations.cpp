@@ -321,3 +321,14 @@ bool CPlaylistOperations::HandleItemsParameter(int playlistid, const CVariant &i
 
   return success;
 }
+
+JSONRPC_STATUS CPlaylistOperations::Save(const CStdString &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result)
+{
+  int playlist = GetPlaylist(parameterObject["playlistid"]);
+  if (playlist != PLAYLIST_MUSIC)
+    return FailedToExecute;
+
+  CApplicationMessenger::Get().PlayListPlayerSave(playlist, (CStdString)parameterObject["filename"].asString());
+
+  return OK;
+}

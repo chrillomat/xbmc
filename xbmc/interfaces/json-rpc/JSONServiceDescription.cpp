@@ -91,6 +91,7 @@ JsonRpcMethodMap CJSONServiceDescription::m_methodMaps[] = {
   { "Playlist.Clear",                               CPlaylistOperations::Clear },
   { "Playlist.Remove",                              CPlaylistOperations::Remove },
   { "Playlist.Swap",                                CPlaylistOperations::Swap },
+  { "Playlist.Save",                                CPlaylistOperations::Save },
 
 // Files
   { "Files.GetSources",                             CFileOperations::GetRootDirectory },

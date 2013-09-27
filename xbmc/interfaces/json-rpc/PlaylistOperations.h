@@ -38,6 +38,7 @@ namespace JSONRPC
     static JSONRPC_STATUS Insert(const CStdString &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result);
     static JSONRPC_STATUS Clear(const CStdString &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result);
     static JSONRPC_STATUS Swap(const CStdString &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result);
+    static JSONRPC_STATUS Save(const CStdString &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result);
   private:
     static int GetPlaylist(const CVariant &playlist);
     static inline void NotifyAll();
