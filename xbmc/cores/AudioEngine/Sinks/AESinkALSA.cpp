@@ -714,10 +714,7 @@ void CAESinkALSA::EnumerateDevicesEx(AEDeviceInfoList &list, bool force)
    * will automatically add "@" instead to enable surroundXX mangling.
    * We don't want to do that if "default" can handle multichannel
    * itself (e.g. in case of a pulseaudio server). */
-
-  /* For Wandboard, we do not enurate default device as it will be grabbed
-   * as one of the sysdefault devices... */
-
+  EnumerateDevice(list, "default", "", config);
 
   void **hints;
 
@@ -878,25 +875,10 @@ void CAESinkALSA::EnumerateDevicesEx(AEDeviceInfoList &list, bool force)
 
 AEDeviceType CAESinkALSA::AEDeviceTypeFromName(const std::string &name)
 {
-  std::size_t found;
-
-  /* Hack : Check for specific wandboard sound device names */
-  found = name.find("imxspdif");
-  if (found!=std::string::npos)
-    return AE_DEVTYPE_IEC958;
-
-  found = name.find("imxhdmisoc");
-  if (found!=std::string::npos)
+  // on some platforms (e.g. wandboard), position of device type is not at pos=0
+  if (name.find("hdmi")!=std::string::npos)
     return AE_DEVTYPE_HDMI;
-
-  found = name.find("sgtl5000audio");
-  if (found!=std::string::npos)
-    return AE_DEVTYPE_PCM;
-
-
-  if (name.substr(0, 4) == "hdmi")
-    return AE_DEVTYPE_HDMI;
-  else if (name.substr(0, 6) == "iec958" || name.substr(0, 5) == "spdif")
+  else if (name.find("iec958")!=std::string::npos || name.find("spdif")!=std::string::npos)
     return AE_DEVTYPE_IEC958;
 
   return AE_DEVTYPE_PCM;
