@@ -538,6 +538,7 @@ unsigned int CAESinkALSA::AddPackets(uint8_t *data, unsigned int frames, bool ha
       HandleError("snd_pcm_writei(2)", ret);
       ret = 0;
     }
+    //ret = 0;
   }
 
   if ( ret > 0 && snd_pcm_state(m_pcm) == SND_PCM_STATE_PREPARED)
@@ -568,7 +569,12 @@ void CAESinkALSA::HandleError(const char* name, int err)
         if ((err = snd_pcm_prepare(m_pcm)) < 0)
           CLog::Log(LOGERROR, "CAESinkALSA::HandleError(%s) - snd_pcm_prepare returned %d (%s)", name, err, snd_strerror(err));
       break;
-
+      //    case -EAGAIN:
+      //      CLog::Log(LOGINFO, "CAESinkALSA::HandleError(%s) - device currently unavailable", name);
+      //      /* try to resume the stream */
+      //      while((err = snd_pcm_resume(m_pcm)) == -EAGAIN)
+      //        Sleep(1);
+      //      break;
     default:
       CLog::Log(LOGERROR, "CAESinkALSA::HandleError(%s) - snd_pcm_writei returned %d (%s)", name, err, snd_strerror(err));
       break;
