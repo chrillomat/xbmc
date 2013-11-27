@@ -30,6 +30,7 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "guilib/gui3d.h"
+#include "utils/StringUtils.h"
 
 CEGLNativeTypeIMX::CEGLNativeTypeIMX()
 {
@@ -45,7 +46,7 @@ bool CEGLNativeTypeIMX::CheckCompatibility()
   get_sysfs_str("/sys/class/graphics/fb0/device/modalias", name, 255);
   CStdString strName = name;
   StringUtils::Trim(strName);
-  if (strName == "platform:mxc_sdc_fb")
+  if (StringUtils::StartsWith(strName,"platform:mxc_sdc_fb"))
     return true;
   return false;
 }
